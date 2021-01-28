@@ -1,11 +1,12 @@
 using Models;
+using UniRx;
 using UnityEngine;
 
 namespace Views
 {
     public class CardView : MonoBehaviour
     {
-        private CardModel _cardModel;
+        public ReactiveProperty<CardModel> CardModel { get; private set; }
 
         private void Start()
         {
@@ -19,7 +20,7 @@ namespace Views
 
         public void SetModel(CardModel cardModel)
         {
-            _cardModel = cardModel;
+            CardModel = new ReactiveProperty<CardModel>(cardModel);
         }
     }
 }
