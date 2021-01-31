@@ -13,13 +13,32 @@ namespace Managers
 
         private void Start()
         {
-            // TODO: test data
-            var cardViewInstance = Instantiate(_cardViewPrefab, _canvasInstance.transform);
-            var cardModel = new CardModel(null, null, "title", "description",
-                "Attack", 1,
-                "HP", 1,
-                "Mana", 1);
+            var randomCardInstance = CreateRandomCardInstance(_cardViewPrefab, _canvasInstance.transform);
+        }
+
+        private CardView CreateRandomCardInstance(CardView cardViewPrefab, Transform parent)
+        {
+            var randomCardModel = CreateRandomCardModel();
+
+            var cardViewInstance = CreateCardInstance(cardViewPrefab, randomCardModel, parent);
+
+            return cardViewInstance;
+        }
+        private CardView CreateCardInstance(CardView cardViewPrefab, CardModel cardModel, Transform parent)
+        {
+            var cardViewInstance = Instantiate(cardViewPrefab, parent);
             cardViewInstance.SetModel(cardModel);
+
+            return cardViewInstance;
+        }
+
+        private static CardModel CreateRandomCardModel()
+        {
+            var cardModel = new CardModel(null, null, "title", "description",
+                "Attack", 100,
+                "HP", 100,
+                "Mana", 100);
+            return cardModel;
         }
     }
 }
