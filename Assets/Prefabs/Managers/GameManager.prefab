@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3628364599957058085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1891690943156109326}
+  - component: {fileID: 381494909875459791}
+  - component: {fileID: 6100679497071390617}
+  - component: {fileID: -2284477137890786954}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1891690943156109326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3628364599957058085}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &381494909875459791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3628364599957058085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74bc527ba368aad429c9fef7355c5919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6100679497071390617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3628364599957058085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6151fc1d88d169146851d01850afc49b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _userInterfaceCanvasPrefab: {fileID: 8840406798762767464, guid: 43c5b10339a7b2943b7c65a041a31185, type: 3}
+  _eventSystemPrefab: {fileID: 2203261091288876343, guid: d6912d9b540aa66429389a20c287b55b, type: 3}
+  _mainCameraPrefab: {fileID: 1450926574008794782, guid: 621cbf227d61d44449da72e4c4d14e38, type: 3}
+--- !u!114 &-2284477137890786954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3628364599957058085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c032683dd30df504cbfa876df1ab591f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cardViewPrefab: {fileID: 4973071091923355724, guid: bb7b3fb075f318545ab6d6a2a5d5f600, type: 3}
+  _canvasInstance: {fileID: 0}

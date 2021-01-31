@@ -1,19 +1,23 @@
 using Models;
 using UnityEngine;
+using Utils;
 using Views;
 
 namespace Managers
 {
-    public class CardManager : MonoBehaviour
+    public class CardManager : MonoBehaviour, IInitilizable, IUnInitializeble
     {
         [SerializeField]
         private CardView _cardViewPrefab;
-        [SerializeField]
-        private Canvas _canvasInstance;
 
-        private void Start()
+        public void Initialize()
         {
-            var randomCardInstance = CreateRandomCardInstance(_cardViewPrefab, _canvasInstance.transform);
+            var randomCardInstance = CreateRandomCardInstance(_cardViewPrefab,
+                GameManager.Instance.UserInterfaceManager.UserInterfaceCanvasInstance.transform);
+        }
+        public void UnInitialize()
+        {
+
         }
 
         private CardView CreateRandomCardInstance(CardView cardViewPrefab, Transform parent)
