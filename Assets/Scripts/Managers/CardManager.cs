@@ -1,39 +1,56 @@
+using System;
+using System.Collections.Generic;
 using Models;
 using UnityEngine;
 using Utils;
 using Views;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
     public class CardManager : MonoBehaviour, IInitilizable, IUnInitializeble
     {
+        public Action<CardModel> CardModelAdded = delegate { };
+
+        public List<CardModel> CardModels = new List<CardModel>();
+
         [SerializeField]
-        private CardView _cardViewPrefab;
+        private CardsViewInstantiatingComponent cardsViewInstantiatingComponentPrefab;
+        [SerializeField]
+        private int _randomCardsMinCount = 3;
+        [SerializeField]
+        private int _randomCardsMaxCount = 6;
+
+        private CardsViewInstantiatingComponent _cardsViewInstantiatingComponentInstance;
 
         public void Initialize()
         {
-            var randomCardInstance = CreateRandomCardInstance(_cardViewPrefab,
+            _cardsViewInstantiatingComponentInstance = Instantiate(cardsViewInstantiatingComponentPrefab, 
                 GameManager.Instance.UserInterfaceManager.UserInterfaceCanvasInstance.transform);
+
+            CreateDemoTimerModels();
         }
         public void UnInitialize()
         {
 
         }
 
-        private CardView CreateRandomCardInstance(CardView cardViewPrefab, Transform parent)
+        public void Add(CardModel cardModel)
         {
-            var randomCardModel = CreateRandomCardModel();
+            CardModels.Add(cardModel);
 
-            var cardViewInstance = CreateCardInstance(cardViewPrefab, randomCardModel, parent);
-
-            return cardViewInstance;
+            CardModelAdded.Invoke(cardModel);
         }
-        private CardView CreateCardInstance(CardView cardViewPrefab, CardModel cardModel, Transform parent)
-        {
-            var cardViewInstance = Instantiate(cardViewPrefab, parent);
-            cardViewInstance.SetModel(cardModel);
 
-            return cardViewInstance;
+        private void CreateDemoTimerModels()
+        {
+            var randomCardsCount = Random.Range(_randomCardsMinCount, _randomCardsMaxCount);
+            for (var i = 0; i < randomCardsCount; i++)
+            {
+                var randomCardModel = CreateRandomCardModel();
+
+                Add(randomCardModel);
+            }
         }
 
         private static CardModel CreateRandomCardModel()

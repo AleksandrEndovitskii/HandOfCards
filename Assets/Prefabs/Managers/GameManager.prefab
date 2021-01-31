@@ -72,5 +72,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c032683dd30df504cbfa876df1ab591f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardViewPrefab: {fileID: 4973071091923355724, guid: bb7b3fb075f318545ab6d6a2a5d5f600, type: 3}
-  _canvasInstance: {fileID: 0}
+  cardsViewInstantiatingComponentPrefab: {fileID: -566057628127048612, guid: c171df2068e10ce4391588c72a85fd76, type: 3}
+  _randomCardsMinCount: 3
+  _randomCardsMaxCount: 6
