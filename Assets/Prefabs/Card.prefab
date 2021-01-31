@@ -139,6 +139,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ManaIconImage
       objectReference: {fileID: 0}
+    - target: {fileID: 3251422948761768433, guid: e21222eac9a5c154f999dec332b288bb, type: 3}
+      propertyPath: _cardView
+      value: 
+      objectReference: {fileID: 4973071091923355724}
     - target: {fileID: 7050003515363280430, guid: e21222eac9a5c154f999dec332b288bb, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -321,6 +325,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4804962175173818080, guid: 7fa4324f767ce82488f9ec0d39c0078f, type: 3}
+      propertyPath: _cardView
+      value: 
+      objectReference: {fileID: 4973071091923355724}
     - target: {fileID: 7588367092634857904, guid: 7fa4324f767ce82488f9ec0d39c0078f, type: 3}
       propertyPath: m_Name
       value: HPIconImage
@@ -427,6 +435,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8578185946091359496, guid: f06efb6123fb0884db89f44f65296b88, type: 3}
+      propertyPath: _cardView
+      value: 
+      objectReference: {fileID: 4973071091923355724}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f06efb6123fb0884db89f44f65296b88, type: 3}
 --- !u!224 &4418749682254984419 stripped
