@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &1444435703585279036
+--- !u!114 &3971084668102718247
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5027253454264776763}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ca2034c25666fe409b3793fc2070b62, type: 3}
+  m_Script: {fileID: 11500000, guid: 75ce827671fd2ba43987783553504544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _cardView: {fileID: 0}
@@ -22,7 +22,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2391307177922060234, guid: 63f55d5665722ef4b98b1c00c1dfa563, type: 3}
       propertyPath: m_Name
-      value: CardDescriptionText
+      value: CardTitleText
       objectReference: {fileID: 0}
     - target: {fileID: 4734236598848077941, guid: 63f55d5665722ef4b98b1c00c1dfa563, type: 3}
       propertyPath: m_Pivot.x
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4734236598848077941, guid: 63f55d5665722ef4b98b1c00c1dfa563, type: 3}
       propertyPath: m_Pivot.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4734236598848077941, guid: 63f55d5665722ef4b98b1c00c1dfa563, type: 3}
       propertyPath: m_RootOrder
