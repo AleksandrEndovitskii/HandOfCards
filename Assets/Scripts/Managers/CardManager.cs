@@ -16,10 +16,18 @@ namespace Managers
 
         [SerializeField]
         private CardsViewInstantiatingComponent cardsViewInstantiatingComponentPrefab;
+
         [SerializeField]
         private int _randomCardsMinCount = 3;
         [SerializeField]
         private int _randomCardsMaxCount = 6;
+
+        [SerializeField]
+        private int _cardAttackDefaultValue = 5;
+        [SerializeField]
+        private int _cardHPDefaultValue = 15;
+        [SerializeField]
+        private int _cardManaDefaultValue = 10;
 
         private CardsViewInstantiatingComponent _cardsViewInstantiatingComponentInstance;
 
@@ -42,6 +50,15 @@ namespace Managers
             CardModelAdded.Invoke(cardModel);
         }
 
+        public void ChangeCardsStatsRandomly(int minValue, int maxValue)
+        {
+            foreach (var cardModel in CardModels)
+            {
+                var randomValue = Random.Range(minValue, maxValue);
+                cardModel.HPValue.Value = randomValue;
+            }
+        }
+
         private void CreateDemoTimerModels()
         {
             var randomCardsCount = Random.Range(_randomCardsMinCount, _randomCardsMaxCount);
@@ -53,12 +70,12 @@ namespace Managers
             }
         }
 
-        private static CardModel CreateRandomCardModel()
+        private CardModel CreateRandomCardModel()
         {
             var cardModel = new CardModel(null, null, "title", "description",
-                "Attack", 100,
-                "HP", 100,
-                "Mana", 100);
+                "Attack", _cardAttackDefaultValue,
+                "HP", _cardHPDefaultValue,
+                "Mana", _cardManaDefaultValue);
             return cardModel;
         }
     }
