@@ -3,10 +3,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using Views;
 
-namespace Components
+namespace Components.Stats.Icons
 {
     [RequireComponent(typeof(Image))]
-    public class ManaIconImageSetterComponent : MonoBehaviour
+    public class HPIconImageSetterComponent : MonoBehaviour
     {
         [SerializeField]
         private CardView _cardView;
@@ -21,7 +21,7 @@ namespace Components
         {
             _cardView.CardModel.Subscribe(cardModel =>
             {
-                cardModel.ManaIconName.Subscribe(iconName =>
+                cardModel.HPIconName.Subscribe(iconName =>
                 {
                     _image.sprite = Resources.Load<Sprite>("Sprites/" + iconName);
                 });

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Views;
 
-namespace Components
+namespace Components.Stats.Icons
 {
     [RequireComponent(typeof(Image))]
     public class AttackIconImageSetterComponent : MonoBehaviour
