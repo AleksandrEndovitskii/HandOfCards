@@ -6,16 +6,17 @@ using Views;
 namespace Components.Stats.Values
 {
     [RequireComponent(typeof(TextMeshProUGUI))]
+    [RequireComponent(typeof(CounterTextComponent))]
     public class AttackValueTextSetterComponent : MonoBehaviour
     {
         [SerializeField]
         private CardView _cardView;
 
-        private TextMeshProUGUI _text;
+        private CounterTextComponent _counterTextComponent;
 
         private void Awake()
         {
-            _text = this.gameObject.GetComponent<TextMeshProUGUI>();
+            _counterTextComponent = this.gameObject.GetComponent<CounterTextComponent>();
         }
         private void Start()
         {
@@ -23,7 +24,7 @@ namespace Components.Stats.Values
             {
                 cardModel.AttackValue.Subscribe(value =>
                 {
-                    _text.text = value.ToString();
+                    _counterTextComponent.Set(value);
                 });
             });
         }
