@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Models;
 using UnityEngine;
 using Utils;
@@ -52,11 +53,14 @@ namespace Managers
 
         public void ChangeCardsStatsRandomly(int minValue, int maxValue)
         {
-            foreach (var cardModel in CardModels)
+            var firstCardModel = CardModels.FirstOrDefault();
+            if (firstCardModel == null)
             {
-                var randomValue = Random.Range(minValue, maxValue);
-                cardModel.HPValue.Value = randomValue;
+                return;
             }
+
+            var randomValue = Random.Range(minValue, maxValue);
+            firstCardModel.HPValue.Value = randomValue;
         }
 
         private void CreateDemoTimerModels()
