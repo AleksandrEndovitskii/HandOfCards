@@ -246,10 +246,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6670989480326121784}
     m_Modifications:
-    - target: {fileID: 1231850398417475291, guid: 7d7385187ce6a0f4aa7145503e21bb0a, type: 3}
-      propertyPath: _cardView
-      value: 
-      objectReference: {fileID: 4973071091923355724}
     - target: {fileID: 1597534633892856954, guid: 7d7385187ce6a0f4aa7145503e21bb0a, type: 3}
       propertyPath: m_Name
       value: HPValueCounterText
@@ -338,6 +334,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8591179619061830783, guid: 7d7385187ce6a0f4aa7145503e21bb0a, type: 3}
+      propertyPath: _cardView
+      value: 
+      objectReference: {fileID: 4973071091923355724}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d7385187ce6a0f4aa7145503e21bb0a, type: 3}
 --- !u!224 &423395395093554637 stripped
@@ -864,7 +864,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: AttackValueCounterText
       objectReference: {fileID: 0}
-    - target: {fileID: 1782927880396034174, guid: f3bd3e279663f214a9757147e7dddd77, type: 3}
+    - target: {fileID: 8213197750271463527, guid: f3bd3e279663f214a9757147e7dddd77, type: 3}
       propertyPath: _cardView
       value: 
       objectReference: {fileID: 4973071091923355724}

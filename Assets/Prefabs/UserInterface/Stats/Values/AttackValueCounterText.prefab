@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &1782927880396034174
+--- !u!114 &8213197750271463527
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 899595144300199233}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd03fdc11186a47408aceb021b7b0fea, type: 3}
+  m_Script: {fileID: 11500000, guid: 630de5edf3b6d5d43b0db58d2762bee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _cardView: {fileID: 0}
+  _propertyName: AttackValue
 --- !u!1001 &3265936419817906075
 PrefabInstance:
   m_ObjectHideFlags: 0

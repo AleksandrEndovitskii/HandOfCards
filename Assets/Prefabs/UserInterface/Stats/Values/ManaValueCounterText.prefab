@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cardView: {fileID: 0}
+  _propertyName: ManaValue
 --- !u!1001 &4396006176695202020
 PrefabInstance:
   m_ObjectHideFlags: 0
