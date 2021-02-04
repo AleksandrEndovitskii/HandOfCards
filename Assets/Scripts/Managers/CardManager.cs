@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Models;
 using UnityEngine;
 using Utils;
@@ -59,8 +60,19 @@ namespace Managers
                 return;
             }
 
-            var randomValue = Random.Range(minValue, maxValue);
-            firstCardModel.HPValue.Value = randomValue;
+            var propertyInfos = firstCardModel.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (var propertyInfo in propertyInfos)
+            {
+                // only interested in stats properties - their type - int
+                // TODO: re-implement this in more efficient way
+                if (propertyInfo.PropertyType != typeof(int))
+                {
+                    continue;
+                }
+
+                var randomValue = Random.Range(minValue, maxValue);
+                PropertyInfoExtensions.SetValue(propertyInfo, firstCardModel, randomValue);
+            }
         }
 
         private void CreateDemoTimerModels()
