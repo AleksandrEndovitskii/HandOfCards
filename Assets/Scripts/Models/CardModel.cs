@@ -14,9 +14,45 @@ namespace Models
         public ReactiveProperty<string> Title { get; private set; }
         public ReactiveProperty<string> Description { get; private set; }
         public ReactiveProperty<string> AttackIconName { get; private set; }
-        public ReactiveProperty<int> AttackValue { get; private set; }
+        public int AttackValue
+        {
+            get
+            {
+                return _attackValue;
+            }
+            set
+            {
+                if (value == _attackValue)
+                {
+                    return;
+                }
+
+                var previousValue = _attackValue;
+                _attackValue = value;
+                PropertyValueChanged.Invoke(ReflectionExtensions.GetCallerName(),
+                    previousValue.ToString(), _attackValue.ToString());
+            }
+        }
         public ReactiveProperty<string> HPIconName { get; private set; }
-        public ReactiveProperty<int> HPValue { get; private set; }
+        public int HPValue
+        {
+            get
+            {
+                return _hpValue;
+            }
+            set
+            {
+                if (value == _hpValue)
+                {
+                    return;
+                }
+
+                var previousValue = _hpValue;
+                _hpValue = value;
+                PropertyValueChanged.Invoke(ReflectionExtensions.GetCallerName(),
+                    previousValue.ToString(), _hpValue.ToString());
+            }
+        }
         public ReactiveProperty<string> ManaIconName { get; private set; }
         public int ManaValue
         {
@@ -24,7 +60,7 @@ namespace Models
             {
                 return _manaValue;
             }
-            private set
+            set
             {
                 if (value == _manaValue)
                 {
@@ -38,6 +74,8 @@ namespace Models
             }
         }
 
+        private int _attackValue;
+        private int _hpValue;
         private int _manaValue;
 
         public CardModel(Image icon, Image frame, string title, string description,
@@ -56,10 +94,10 @@ namespace Models
             Description = new ReactiveProperty<string>(description);
 
             AttackIconName = new ReactiveProperty<string>(attackIconName);
-            AttackValue = new ReactiveProperty<int>(attackValue);
+            AttackValue = attackValue;
 
             HPIconName = new ReactiveProperty<string>(hpIconName);
-            HPValue = new ReactiveProperty<int>(hpValue);
+            HPValue = hpValue;
 
             ManaIconName = new ReactiveProperty<string>(manaIconName);
             ManaValue = manaValue;
