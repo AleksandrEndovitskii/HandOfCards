@@ -44,6 +44,7 @@ namespace Views
         {
             var cardViewInstance = InstantiateElement(cardModel, _cardViewPrefab, GameManager.Instance.UserInterfaceManager.UserInterfaceCanvasInstance.transform);
             _cardViewInstances.Add(cardViewInstance);
+            GameManager.Instance.CardViewTrackingManager.Track(cardViewInstance);
             _customHorizontalLayoutGroupView.AddElement(cardViewInstance.gameObject.GetComponent<RectTransform>());
         }
 

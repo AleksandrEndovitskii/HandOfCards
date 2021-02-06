@@ -14,8 +14,6 @@ namespace Managers
     {
         public Action<CardModel> CardModelAdded = delegate { };
 
-        public List<CardModel> CardModels = new List<CardModel>();
-
         [SerializeField]
         private CardsViewInstantiatingComponent cardsViewInstantiatingComponentPrefab;
 
@@ -30,6 +28,10 @@ namespace Managers
         private int _cardHPDefaultValue = 15;
         [SerializeField]
         private int _cardManaDefaultValue = 10;
+
+        public List<CardModel> CardModels = new List<CardModel>();
+
+        private List<CardModel> _cardModelsWithRandomlySettedStats = new List<CardModel>();
 
         private CardsViewInstantiatingComponent _cardsViewInstantiatingComponentInstance;
 
@@ -54,13 +56,20 @@ namespace Managers
 
         public void ChangeCardsStatsRandomly(int minValue, int maxValue)
         {
-            var firstCardModel = CardModels.FirstOrDefault();
-            if (firstCardModel == null)
+            _cardModelsWithRandomlySettedStats.Clear();
+
+            SetRandomStatsForNextCardModel(minValue, maxValue);
+        }
+
+        private void SetRandomStatsForNextCardModel(int minValue, int maxValue)
+        {
+            var cardModel = CardModels.FirstOrDefault(x => !_cardModelsWithRandomlySettedStats.Contains(x));
+            if (cardModel == null)
             {
                 return;
             }
 
-            var propertyInfos = firstCardModel.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var propertyInfos = cardModel.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (var propertyInfo in propertyInfos)
             {
                 // only interested in stats properties - their type - int
@@ -71,8 +80,10 @@ namespace Managers
                 }
 
                 var randomValue = Random.Range(minValue, maxValue);
-                PropertyInfoExtensions.SetValue(propertyInfo, firstCardModel, randomValue);
+                PropertyInfoExtensions.SetValue(propertyInfo, cardModel, randomValue);
             }
+
+            _cardModelsWithRandomlySettedStats.Add(cardModel);
         }
 
         private void CreateDemoTimerModels()

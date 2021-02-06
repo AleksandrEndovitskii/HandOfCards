@@ -5,6 +5,7 @@ namespace Managers
 {
     [RequireComponent(typeof(UserInterfaceManager))]
     [RequireComponent(typeof(CardManager))]
+    [RequireComponent(typeof(CardViewTrackingManager))]
     public class GameManager : MonoBehaviour, IInitilizable, IUnInitializeble
     {
         // static instance of GameManager which allows it to be accessed by any other script
@@ -12,6 +13,7 @@ namespace Managers
 
         public UserInterfaceManager UserInterfaceManager => this.gameObject.GetComponent<UserInterfaceManager>();
         public CardManager CardManager => this.gameObject.GetComponent<CardManager>();
+        public CardViewTrackingManager CardViewTrackingManager => this.gameObject.GetComponent<CardViewTrackingManager>();
 
         private void Awake()
         {
@@ -41,9 +43,11 @@ namespace Managers
         {
             UserInterfaceManager.Initialize();
             CardManager.Initialize();
+            CardViewTrackingManager.Initialize();
         }
         public void UnInitialize()
         {
+            CardViewTrackingManager.UnInitialize();
             CardManager.UnInitialize();
             UserInterfaceManager.UnInitialize();
         }

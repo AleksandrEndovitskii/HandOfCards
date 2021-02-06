@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using Extensions;
 using TMPro;
@@ -8,10 +9,13 @@ namespace Components
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class CounterTextComponent : MonoBehaviour
     {
+        public event Action<CounterTextComponent> AnimationComplete = delegate { };
+
         [SerializeField]
         private float _durationSecondsCount = 1;
 
         private TextMeshProUGUI _text;
+        private Tweener _tweener;
 
         private void Awake()
         {
@@ -22,7 +26,20 @@ namespace Components
         {
             int.TryParse(_text.text, out var initialValue);
 
-            _text.DOText(initialValue, finalValue, _durationSecondsCount, it => $"{it:0}").SetEase(Ease.Linear);
+            if (_tweener != null)
+            {
+                _tweener.onComplete -= OnTweenerONComplete;
+            }
+            _tweener = _text.DOText(initialValue, finalValue, _durationSecondsCount, it => $"{it:0}").
+                SetEase(Ease.Linear);
+            _tweener.onComplete += OnTweenerONComplete;
+        }
+
+        private void OnTweenerONComplete()
+        {
+            Debug.Log("CounterTextComponent.OnTweenerONComplete");
+
+            AnimationComplete.Invoke(this);
         }
     }
 }
