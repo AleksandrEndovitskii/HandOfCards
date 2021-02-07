@@ -78,6 +78,8 @@ namespace Managers
             if (keyValuePair.Value.Count == 0)
             {
                 CardViewCounterTextComponentAnimationsCompleted.Invoke(keyValuePair.Key);
+
+                _waitingForComplitionOfAnimationCardViewCounterTextComponents.Remove(keyValuePair.Key);
             }
         }
     }

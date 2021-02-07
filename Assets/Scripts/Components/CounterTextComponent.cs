@@ -30,6 +30,10 @@ namespace Components
             {
                 _tweener.onComplete -= OnTweenerONComplete;
             }
+            if (initialValue == finalValue)
+            {
+                OnTweenerONComplete();
+            }
             _tweener = _text.DOText(initialValue, finalValue, _durationSecondsCount, it => $"{it:0}").
                 SetEase(Ease.Linear);
             _tweener.onComplete += OnTweenerONComplete;
