@@ -44,6 +44,7 @@ namespace Managers
             Debug.Log("CardView added to CardViewTrackingManager");
 
             var counterTextComponents = cardView.gameObject.GetComponentsInChildren<CounterTextComponent>().ToList();
+            _waitingForComplitionOfAnimationCardViewCounterTextComponents[cardView] = counterTextComponents;
             foreach (var counterTextComponent in counterTextComponents)
             {
                 if (_trackedCounterTextComponents.Contains(counterTextComponent))
@@ -54,15 +55,13 @@ namespace Managers
                 _trackedCounterTextComponents.Add(counterTextComponent);
                 Debug.Log("CounterTextComponent added to CardViewTrackingManager");
 
-                counterTextComponent.AnimationComplete += CounterTextComponentOnAnimationComplete;
+                counterTextComponent.AnimationCompleted += CounterTextComponentOnAnimationCompleted;
             }
-
-            _waitingForComplitionOfAnimationCardViewCounterTextComponents[cardView] = counterTextComponents;
 
             CardViewAdded.Invoke(cardView);
         }
 
-        private void CounterTextComponentOnAnimationComplete(CounterTextComponent counterTextComponent)
+        private void CounterTextComponentOnAnimationCompleted(CounterTextComponent counterTextComponent)
         {
             Debug.Log("CardViewTrackingManager.CounterTextComponentOnAnimationComplete");
 
@@ -77,9 +76,10 @@ namespace Managers
 
             if (keyValuePair.Value.Count == 0)
             {
-                CardViewCounterTextComponentAnimationsCompleted.Invoke(keyValuePair.Key);
+                var counterTextComponents = keyValuePair.Key.gameObject.GetComponentsInChildren<CounterTextComponent>().ToList();
+                _waitingForComplitionOfAnimationCardViewCounterTextComponents[keyValuePair.Key] = counterTextComponents;
 
-                _waitingForComplitionOfAnimationCardViewCounterTextComponents.Remove(keyValuePair.Key);
+                CardViewCounterTextComponentAnimationsCompleted.Invoke(keyValuePair.Key);
             }
         }
     }

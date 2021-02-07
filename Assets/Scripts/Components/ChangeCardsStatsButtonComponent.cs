@@ -7,11 +7,6 @@ namespace Components
     [RequireComponent(typeof(Button))]
     public class ChangeCardsStatsButtonComponent : MonoBehaviour
     {
-        [SerializeField]
-        private int _minValue = -2;
-        [SerializeField]
-        private int _maxValue = 9;
-
         private Button _button;
         private CardManager _cardManager;
 
@@ -34,7 +29,7 @@ namespace Components
         {
             Debug.Log("ChangeCardsStatsButtonComponent");
 
-            _cardManager.ChangeCardsStatsRandomly(_minValue, _maxValue);
+            _cardManager.ChangeCardsStatsRandomly();
         }
     }
 }

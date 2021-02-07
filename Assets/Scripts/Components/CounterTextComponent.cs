@@ -9,7 +9,7 @@ namespace Components
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class CounterTextComponent : MonoBehaviour
     {
-        public event Action<CounterTextComponent> AnimationComplete = delegate { };
+        public event Action<CounterTextComponent> AnimationCompleted = delegate { };
 
         [SerializeField]
         private float _durationSecondsCount = 1;
@@ -43,7 +43,7 @@ namespace Components
         {
             Debug.Log("CounterTextComponent.OnTweenerONComplete");
 
-            AnimationComplete.Invoke(this);
+            AnimationCompleted.Invoke(this);
         }
     }
 }

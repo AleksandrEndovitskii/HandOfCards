@@ -29,6 +29,11 @@ namespace Managers
         [SerializeField]
         private int _cardManaDefaultValue = 10;
 
+        [SerializeField]
+        private int _minValue = -2;
+        [SerializeField]
+        private int _maxValue = 9;
+
         public List<CardModel> CardModels = new List<CardModel>();
 
         private List<CardModel> _cardModelsWithRandomlySettedStats = new List<CardModel>();
@@ -37,14 +42,18 @@ namespace Managers
 
         public void Initialize()
         {
-            _cardsViewInstantiatingComponentInstance = Instantiate(cardsViewInstantiatingComponentPrefab, 
+            _cardsViewInstantiatingComponentInstance = Instantiate(cardsViewInstantiatingComponentPrefab,
                 GameManager.Instance.UserInterfaceManager.UserInterfaceCanvasInstance.transform);
 
             CreateDemoTimerModels();
+
+            GameManager.Instance.CardViewTrackingManager.CardViewCounterTextComponentAnimationsCompleted +=
+                OnCardViewCounterTextComponentAnimationsCompleted;
         }
         public void UnInitialize()
         {
-
+            GameManager.Instance.CardViewTrackingManager.CardViewCounterTextComponentAnimationsCompleted -=
+                OnCardViewCounterTextComponentAnimationsCompleted;
         }
 
         public void Add(CardModel cardModel)
@@ -54,11 +63,11 @@ namespace Managers
             CardModelAdded.Invoke(cardModel);
         }
 
-        public void ChangeCardsStatsRandomly(int minValue, int maxValue)
+        public void ChangeCardsStatsRandomly()
         {
             _cardModelsWithRandomlySettedStats.Clear();
 
-            SetRandomStatsForNextCardModel(minValue, maxValue);
+            SetRandomStatsForNextCardModel(_minValue, _maxValue);
         }
 
         private void SetRandomStatsForNextCardModel(int minValue, int maxValue)
@@ -104,6 +113,16 @@ namespace Managers
                 "HP", _cardHPDefaultValue,
                 "Mana", _cardManaDefaultValue);
             return cardModel;
+        }
+
+        private void OnCardViewCounterTextComponentAnimationsCompleted(CardView cardView)
+        {
+            if (!_cardModelsWithRandomlySettedStats.Contains(cardView.CardModel.Value))
+            {
+                return;
+            }
+
+            SetRandomStatsForNextCardModel(_minValue, _maxValue);
         }
     }
 }
