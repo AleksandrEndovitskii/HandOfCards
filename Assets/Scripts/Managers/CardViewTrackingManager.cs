@@ -16,7 +16,7 @@ namespace Managers
         private List<CardView> _trackedCardViews = new List<CardView>();
         private List<CounterTextComponent> _trackedCounterTextComponents = new List<CounterTextComponent>();
 
-        private Dictionary<CardView, List<CounterTextComponent>> _waitingForComplitionOfAnimationCardViewCounterTextComponents =
+        private Dictionary<CardView, List<CounterTextComponent>> _cardViewCounterTextComponents =
             new Dictionary<CardView, List<CounterTextComponent>>();
 
         public void Initialize()
@@ -44,7 +44,7 @@ namespace Managers
             Debug.Log("CardView added to CardViewTrackingManager");
 
             var counterTextComponents = cardView.gameObject.GetComponentsInChildren<CounterTextComponent>().ToList();
-            _waitingForComplitionOfAnimationCardViewCounterTextComponents[cardView] = counterTextComponents;
+            _cardViewCounterTextComponents[cardView] = counterTextComponents;
             foreach (var counterTextComponent in counterTextComponents)
             {
                 if (_trackedCounterTextComponents.Contains(counterTextComponent))
@@ -65,22 +65,16 @@ namespace Managers
         {
             Debug.Log("CardViewTrackingManager.CounterTextComponentOnAnimationComplete");
 
-            if (_waitingForComplitionOfAnimationCardViewCounterTextComponents.All(x =>
+            if (_cardViewCounterTextComponents.All(x =>
                 !x.Value.Contains(counterTextComponent)))
             {
                 return;
             }
-            var keyValuePair = _waitingForComplitionOfAnimationCardViewCounterTextComponents.FirstOrDefault(x =>
+
+            var keyValuePair = _cardViewCounterTextComponents.FirstOrDefault(x =>
                 x.Value.Contains(counterTextComponent));
-            keyValuePair.Value.Remove(counterTextComponent);
 
-            if (keyValuePair.Value.Count == 0)
-            {
-                var counterTextComponents = keyValuePair.Key.gameObject.GetComponentsInChildren<CounterTextComponent>().ToList();
-                _waitingForComplitionOfAnimationCardViewCounterTextComponents[keyValuePair.Key] = counterTextComponents;
-
-                CardViewCounterTextComponentAnimationsCompleted.Invoke(keyValuePair.Key);
-            }
+            CardViewCounterTextComponentAnimationsCompleted.Invoke(keyValuePair.Key);
         }
     }
 }

@@ -63,34 +63,38 @@ namespace Managers
             CardModelAdded.Invoke(cardModel);
         }
 
-        public void ChangeCardsStatsRandomly()
+        public void StartCardsStatsRandomlyChanging()
         {
             _cardModelsWithRandomlySettedStats.Clear();
 
-            SetRandomStatsForNextCardModel(_minValue, _maxValue);
+            SetRandomStatForNextCardModel(_minValue, _maxValue);
         }
 
-        private void SetRandomStatsForNextCardModel(int minValue, int maxValue)
+        private void SetRandomStatForNextCardModel(int minValue, int maxValue)
         {
+            // if sequence of stat changing has completed - restart it
+            if (CardModels.All(x => _cardModelsWithRandomlySettedStats.Contains(x)))
+            {
+                _cardModelsWithRandomlySettedStats = _cardModelsWithRandomlySettedStats.Except(CardModels).ToList();
+            }
+
             var cardModel = CardModels.FirstOrDefault(x => !_cardModelsWithRandomlySettedStats.Contains(x));
             if (cardModel == null)
             {
                 return;
             }
 
-            var propertyInfos = cardModel.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            foreach (var propertyInfo in propertyInfos)
+            var propertyInfos = cardModel.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(x=>
+                x.PropertyType == typeof(int)).ToList();
+            if (propertyInfos.Count == 0)
             {
-                // only interested in stats properties - their type - int
-                // TODO: re-implement this in more efficient way
-                if (propertyInfo.PropertyType != typeof(int))
-                {
-                    continue;
-                }
-
-                var randomValue = Random.Range(minValue, maxValue);
-                PropertyInfoExtensions.SetValue(propertyInfo, cardModel, randomValue);
+                return;
             }
+
+            var indexOfRandomPropertyInfo = Random.Range(0, propertyInfos.Count);
+            var randomPropertyInfo = propertyInfos[indexOfRandomPropertyInfo];
+            var randomValueOfPropertyInfo = Random.Range(minValue, maxValue);
+            PropertyInfoExtensions.SetValue(randomPropertyInfo, cardModel, randomValueOfPropertyInfo);
 
             _cardModelsWithRandomlySettedStats.Add(cardModel);
         }
@@ -122,7 +126,7 @@ namespace Managers
                 return;
             }
 
-            SetRandomStatsForNextCardModel(_minValue, _maxValue);
+            SetRandomStatForNextCardModel(_minValue, _maxValue);
         }
     }
 }

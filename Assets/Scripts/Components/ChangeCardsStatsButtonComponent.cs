@@ -29,7 +29,7 @@ namespace Components
         {
             Debug.Log("ChangeCardsStatsButtonComponent");
 
-            _cardManager.ChangeCardsStatsRandomly();
+            _cardManager.StartCardsStatsRandomlyChanging();
         }
     }
 }
