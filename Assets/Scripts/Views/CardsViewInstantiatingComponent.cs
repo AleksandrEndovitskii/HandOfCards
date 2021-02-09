@@ -8,11 +8,6 @@ namespace Views
     [RequireComponent(typeof(CustomHorizontalLayoutGroupView))]
     public class CardsViewInstantiatingComponent : MonoBehaviour
     {
-        [SerializeField]
-        private CardView _cardViewPrefab;
-
-        private List<CardView> _cardViewInstances = new List<CardView>();
-
         private CustomHorizontalLayoutGroupView _customHorizontalLayoutGroupView;
 
         private CardManager _cardManager;
@@ -42,17 +37,9 @@ namespace Views
 
         private void AddElement(CardModel cardModel)
         {
-            var cardViewInstance = InstantiateElement(cardModel, _cardViewPrefab, GameManager.Instance.UserInterfaceManager.UserInterfaceCanvasInstance.transform);
-            _cardViewInstances.Add(cardViewInstance);
-            GameManager.Instance.CardViewTrackingManager.Track(cardViewInstance);
+            var cardViewInstance = GameManager.Instance.CardsViewsFactory.Create(cardModel,
+                GameManager.Instance.UserInterfaceManager.UserInterfaceCanvasInstance.transform);
             _customHorizontalLayoutGroupView.AddElement(cardViewInstance.gameObject.GetComponent<RectTransform>());
-        }
-
-        private CardView InstantiateElement(CardModel cardModel, CardView cardViewPrefab, Transform parent)
-        {
-            var instance = Instantiate(cardViewPrefab, parent);
-            instance.SetModel(cardModel);
-            return instance;
         }
     }
 }

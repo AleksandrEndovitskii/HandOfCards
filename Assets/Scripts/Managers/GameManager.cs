@@ -1,3 +1,4 @@
+using Factories;
 using UnityEngine;
 using Utils;
 
@@ -6,6 +7,7 @@ namespace Managers
     [RequireComponent(typeof(UserInterfaceManager))]
     [RequireComponent(typeof(CardManager))]
     [RequireComponent(typeof(CardViewTrackingManager))]
+    [RequireComponent(typeof(CardsViewsFactory))]
     public class GameManager : MonoBehaviour, IInitilizable, IUnInitializeble
     {
         // static instance of GameManager which allows it to be accessed by any other script
@@ -14,6 +16,8 @@ namespace Managers
         public UserInterfaceManager UserInterfaceManager => this.gameObject.GetComponent<UserInterfaceManager>();
         public CardManager CardManager => this.gameObject.GetComponent<CardManager>();
         public CardViewTrackingManager CardViewTrackingManager => this.gameObject.GetComponent<CardViewTrackingManager>();
+
+        public CardsViewsFactory CardsViewsFactory => this.gameObject.GetComponent<CardsViewsFactory>();
 
         private void Awake()
         {

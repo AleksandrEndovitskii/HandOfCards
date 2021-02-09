@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6100679497071390617}
   - component: {fileID: -2284477137890786954}
   - component: {fileID: 851360773978909432}
+  - component: {fileID: 7857348350670881155}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -79,6 +80,8 @@ MonoBehaviour:
   _cardAttackDefaultValue: 5
   _cardHPDefaultValue: 15
   _cardManaDefaultValue: 10
+  _minValue: -2
+  _maxValue: 9
 --- !u!114 &851360773978909432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,3 +94,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29cb9ef7a477c94ba31a3d4810998d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7857348350670881155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3628364599957058085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dc60de9f25df0748921531c5f853bbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cardViewPrefab: {fileID: 4973071091923355724, guid: bb7b3fb075f318545ab6d6a2a5d5f600, type: 3}
