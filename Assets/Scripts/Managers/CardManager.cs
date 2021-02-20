@@ -40,6 +40,8 @@ namespace Managers
 
         private CardsViewInstantiatingComponent _cardsViewInstantiatingComponentInstance;
 
+        private int _initialCardModelId = 1;
+
         public void Initialize()
         {
             _cardsViewInstantiatingComponentInstance = Instantiate(cardsViewInstantiatingComponentPrefab,
@@ -85,7 +87,9 @@ namespace Managers
             }
 
             var propertyInfos = cardModel.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(x=>
-                x.PropertyType == typeof(int)).ToList();
+                x.PropertyType == typeof(int)).
+                Where(x=>x.Name != "Id").
+                ToList();
             if (propertyInfos.Count == 0)
             {
                 return;
@@ -112,15 +116,18 @@ namespace Managers
 
         private CardModel CreateRandomCardModel()
         {
-            var cardModel = new CardModel(null, null, "title", "description",
+            var cardModel = new CardModel(_initialCardModelId, null, null, "title", "description",
                 "Attack", _cardAttackDefaultValue,
                 "HP", _cardHPDefaultValue,
                 "Mana", _cardManaDefaultValue);
+            _initialCardModelId++;
             return cardModel;
         }
 
         private void OnCardViewCounterTextComponentAnimationsCompleted(CardView cardView)
         {
+            Debug.Log("OnCardViewCounterTextComponentAnimationsCompleted");
+
             if (!_cardModelsWithRandomlySettedStats.Contains(cardView.CardModel.Value))
             {
                 return;

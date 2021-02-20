@@ -9,6 +9,25 @@ namespace Models
     {
         public Action<string, string, string> PropertyValueChanged = delegate { };
 
+        public int Id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (value == _id)
+                {
+                    return;
+                }
+
+                var previousValue = _id;
+                _id = value;
+                PropertyValueChanged.Invoke(ReflectionExtensions.GetCallerName(),
+                    previousValue.ToString(), _id.ToString());
+            }
+        }
         public ReactiveProperty<Image> Icon { get; private set; }
         public ReactiveProperty<Image> Frame { get; private set; }
         public ReactiveProperty<string> Title { get; private set; }
@@ -74,13 +93,14 @@ namespace Models
             }
         }
 
+        private int _id;
         private int _attackValue;
         private int _hpValue;
         private int _manaValue;
 
-        public CardModel(Image icon, Image frame, string title, string description,
+        public CardModel(int id, Image icon, Image frame, string title, string description,
             string attackIconName, int attackValue,
-            string hpIconName, int hpValue, 
+            string hpIconName, int hpValue,
             string manaIconName, int manaValue)
         {
             PropertyValueChanged += (propertyName, previousValue, currentValue) =>
@@ -88,6 +108,7 @@ namespace Models
                 Debug.Log($"{GetType().Name}.{propertyName} changed from {previousValue} to {currentValue}");
             };
 
+            Id = id;
             Icon = new ReactiveProperty<Image>(icon);
             Frame = new ReactiveProperty<Image>(frame);
             Title = new ReactiveProperty<string>(title);
