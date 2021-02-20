@@ -27,7 +27,7 @@ namespace Components
 
         private void OnClick()
         {
-            Debug.Log("ChangeCardsStatsButtonComponent");
+            Debug.Log("ChangeCardsStatsButtonComponent.OnClick");
 
             _cardManager.StartCardsStatsRandomlyChanging();
         }
