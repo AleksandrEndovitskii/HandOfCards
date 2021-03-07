@@ -1,3 +1,3 @@
 # HandOfCards
 
-Base libriary for creationg you own CCG games
+Base library for creating you own CCG games
